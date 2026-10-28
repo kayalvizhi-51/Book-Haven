@@ -1,0 +1,569 @@
+/* ============================================================================
+   Book Haven – Online Bookstore and Inventory Management System
+   Unit I & II: CSS3 Variables, Custom Styling, Animations, Responsive Design
+   Theme Palette: Elegant Cream, Rich Brown, and Deep Forest Green
+   ============================================================================ */
+
+:root {
+  /* Elegant Palette */
+  --color-cream-bg: #FBF8F2;
+  --color-cream-surface: #FFFFFF;
+  --color-cream-card: #F7F3EB;
+  --color-cream-border: #E5DDCF;
+  --color-cream-subtle: #ECE5D8;
+
+  --color-brown-dark: #2D1E16;
+  --color-brown-primary: #4B382A;
+  --color-brown-light: #6E533F;
+  --color-amber-gold: #C08A4D;
+  --color-amber-light: #E7C9A5;
+
+  --color-green-dark: #122817;
+  --color-green-primary: #1E3F20;
+  --color-green-accent: #2C5730;
+  --color-green-light: #447B49;
+  --color-green-soft: #E9F2EA;
+
+  --color-text-heading: #261B14;
+  --color-text-body: #3E352F;
+  --color-text-muted: #736961;
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  --shadow-sm: 0 2px 6px rgba(45, 30, 22, 0.05);
+  --shadow-md: 0 6px 18px rgba(45, 30, 22, 0.08);
+  --shadow-lg: 0 14px 34px rgba(45, 30, 22, 0.12);
+  --shadow-hover: 0 18px 40px rgba(30, 63, 32, 0.15);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-pill: 50px;
+
+  --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Body Styles */
+body {
+  background-color: var(--color-cream-bg);
+  color: var(--color-text-body);
+  font-family: var(--font-sans);
+  line-height: 1.65;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6, .brand-font {
+  font-family: var(--font-serif);
+  color: var(--color-text-heading);
+  letter-spacing: -0.015em;
+}
+
+a {
+  color: var(--color-green-primary);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+a:hover {
+  color: var(--color-green-accent);
+}
+
+/* ============================================================================
+   Custom Component Styling
+   ============================================================================ */
+
+/* Navbar */
+.haven-navbar {
+  background-color: rgba(251, 248, 242, 0.96) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-cream-border);
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  padding: 0.85rem 0;
+  transition: var(--transition-smooth);
+}
+
+.haven-brand {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.55rem;
+  color: var(--color-brown-dark) !important;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.haven-brand i {
+  color: var(--color-green-primary);
+  font-size: 1.7rem;
+}
+
+.nav-link-haven {
+  font-weight: 500;
+  color: var(--color-brown-primary) !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-smooth);
+}
+
+.nav-link-haven:hover, .nav-link-haven.active {
+  color: var(--color-green-primary) !important;
+  background-color: rgba(30, 63, 32, 0.08);
+}
+
+/* Cart Badge */
+.cart-badge-btn {
+  position: relative;
+  background-color: var(--color-green-primary);
+  color: #FFFFFF !important;
+  border-radius: var(--radius-pill);
+  padding: 0.5rem 1.15rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  box-shadow: 0 4px 12px rgba(30, 63, 32, 0.25);
+  transition: var(--transition-smooth);
+}
+
+.cart-badge-btn:hover {
+  background-color: var(--color-green-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(30, 63, 32, 0.35);
+}
+
+.cart-badge-count {
+  background-color: var(--color-amber-gold);
+  color: #FFFFFF;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  padding: 0.15rem 0.55rem;
+  font-weight: 700;
+}
+
+/* Hero Section */
+.hero-haven {
+  background: linear-gradient(135deg, #1E3F20 0%, #2D522F 60%, #3B2E24 100%);
+  color: #FFFFFF;
+  padding: 4.5rem 0 4rem 0;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid var(--color-amber-gold);
+}
+
+.hero-haven::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(192, 138, 77, 0.15), transparent 50%);
+  pointer-events: none;
+}
+
+.hero-haven h1 {
+  color: #FFFFFF;
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.hero-tagline {
+  color: #E2D9CC;
+  font-size: 1.15rem;
+  max-width: 620px;
+}
+
+.hero-badge {
+  background-color: rgba(192, 138, 77, 0.25);
+  border: 1px solid var(--color-amber-gold);
+  color: var(--color-amber-light);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--radius-pill);
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+/* Book Card */
+.book-card {
+  background-color: var(--color-cream-surface);
+  border: 1px solid var(--color-cream-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.book-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--color-green-light);
+}
+
+.book-cover-container {
+  position: relative;
+  height: 250px;
+  background-color: var(--color-cream-subtle);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.book-card:hover .book-cover-img {
+  transform: scale(1.05);
+}
+
+.category-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: rgba(30, 63, 32, 0.88);
+  backdrop-filter: blur(4px);
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.stock-tag {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+}
+
+.stock-in {
+  background-color: rgba(46, 125, 50, 0.9);
+  color: #FFFFFF;
+}
+
+.stock-low {
+  background-color: rgba(224, 112, 19, 0.9);
+  color: #FFFFFF;
+}
+
+.stock-out {
+  background-color: rgba(198, 40, 40, 0.9);
+  color: #FFFFFF;
+}
+
+.book-card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.book-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  color: var(--color-text-heading);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.8rem;
+}
+
+.book-card-author {
+  font-size: 0.9rem;
+  color: var(--color-brown-light);
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.book-card-price {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-green-primary);
+  font-family: var(--font-sans);
+}
+
+/* Category Filter Pills */
+.filter-pills-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.category-pill-btn {
+  background-color: var(--color-cream-surface);
+  border: 1px solid var(--color-cream-border);
+  color: var(--color-brown-primary);
+  padding: 0.5rem 1.15rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.category-pill-btn:hover {
+  background-color: var(--color-cream-subtle);
+  color: var(--color-brown-dark);
+  border-color: var(--color-brown-light);
+}
+
+.category-pill-btn.active {
+  background-color: var(--color-green-primary);
+  color: #FFFFFF;
+  border-color: var(--color-green-primary);
+  box-shadow: 0 4px 10px rgba(30, 63, 32, 0.2);
+}
+
+/* Search Bar */
+.search-box-wrapper {
+  position: relative;
+}
+
+.search-input-haven {
+  background-color: var(--color-cream-surface);
+  border: 2px solid var(--color-cream-border);
+  border-radius: var(--radius-pill);
+  padding: 0.75rem 1.25rem 0.75rem 3rem;
+  font-size: 1rem;
+  transition: var(--transition-smooth);
+  width: 100%;
+}
+
+.search-input-haven:focus {
+  border-color: var(--color-green-primary);
+  box-shadow: 0 0 0 4px rgba(30, 63, 32, 0.12);
+  outline: none;
+}
+
+.search-icon-haven {
+  position: absolute;
+  left: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  font-size: 1.15rem;
+  pointer-events: none;
+}
+
+/* Primary Button Themes */
+.btn-haven-primary {
+  background-color: var(--color-green-primary);
+  color: #FFFFFF;
+  border: none;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 1.25rem;
+  transition: var(--transition-smooth);
+}
+
+.btn-haven-primary:hover {
+  background-color: var(--color-green-accent);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 63, 32, 0.25);
+}
+
+.btn-haven-outline {
+  background-color: transparent;
+  color: var(--color-green-primary);
+  border: 1.5px solid var(--color-green-primary);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 1.2rem;
+  transition: var(--transition-smooth);
+}
+
+.btn-haven-outline:hover {
+  background-color: var(--color-green-primary);
+  color: #FFFFFF;
+}
+
+.btn-haven-brown {
+  background-color: var(--color-brown-primary);
+  color: #FFFFFF;
+  border: none;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 1.25rem;
+  transition: var(--transition-smooth);
+}
+
+.btn-haven-brown:hover {
+  background-color: var(--color-brown-dark);
+  color: #FFFFFF;
+}
+
+/* Admin Dashboard Table */
+.haven-table-card {
+  background-color: var(--color-cream-surface);
+  border: 1px solid var(--color-cream-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.haven-table {
+  margin-bottom: 0;
+}
+
+.haven-table thead th {
+  background-color: var(--color-cream-card);
+  color: var(--color-brown-dark);
+  font-weight: 600;
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-bottom: 2px solid var(--color-cream-border);
+  padding: 1rem 1.2rem;
+}
+
+.haven-table tbody td {
+  padding: 1rem 1.2rem;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--color-cream-border);
+}
+
+.haven-table tbody tr:hover {
+  background-color: rgba(30, 63, 32, 0.03);
+}
+
+/* Stat Cards */
+.stat-card {
+  background-color: var(--color-cream-surface);
+  border: 1px solid var(--color-cream-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  transition: var(--transition-smooth);
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+}
+
+.stat-icon-green {
+  background-color: var(--color-green-soft);
+  color: var(--color-green-primary);
+}
+
+.stat-icon-brown {
+  background-color: #F4EBE3;
+  color: var(--color-brown-primary);
+}
+
+.stat-icon-gold {
+  background-color: #FDF4E5;
+  color: var(--color-amber-gold);
+}
+
+.stat-number {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--color-text-heading);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Empty State / No Books Found */
+.empty-state-box {
+  background-color: var(--color-cream-surface);
+  border: 2px dashed var(--color-cream-border);
+  border-radius: var(--radius-lg);
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.empty-state-icon {
+  font-size: 3.5rem;
+  color: var(--color-amber-gold);
+  margin-bottom: 1rem;
+}
+
+/* Footer */
+.haven-footer {
+  background-color: var(--color-brown-dark);
+  color: #D8CFBE;
+  padding: 3.5rem 0 1.5rem 0;
+  margin-top: 5rem;
+  border-top: 4px solid var(--color-green-primary);
+}
+
+.haven-footer h5 {
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+
+.haven-footer a {
+  color: #D8CFBE;
+}
+
+.haven-footer a:hover {
+  color: var(--color-amber-light);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.5rem;
+  margin-top: 2.5rem;
+  font-size: 0.85rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .hero-haven h1 {
+    font-size: 2.2rem;
+  }
+  .hero-haven {
+    padding: 3rem 0;
+  }
+}

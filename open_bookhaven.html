@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Haven – Online Bookstore and Management System</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    :root {
+      --color-cream-bg: #FBF8F2;
+      --color-cream-surface: #FFFFFF;
+      --color-cream-card: #F7F3EB;
+      --color-cream-border: #E5DDCF;
+      --color-brown-dark: #2D1E16;
+      --color-brown-primary: #4B382A;
+      --color-amber-gold: #C08A4D;
+      --color-green-primary: #1E3F20;
+      --color-green-accent: #2C5730;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+
+    body {
+      background-color: var(--color-cream-bg);
+      color: #3E352F;
+      font-family: var(--font-sans);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1, h2, h3, h4, h5, .brand-font {
+      font-family: var(--font-serif);
+      color: var(--color-brown-dark);
+    }
+
+    .haven-navbar {
+      background-color: rgba(251, 248, 242, 0.98);
+      border-bottom: 1px solid var(--color-cream-border);
+      position: sticky;
+      top: 0;
+      z-index: 1030;
+      padding: 0.85rem 0;
+    }
+
+    .haven-brand {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.55rem;
+      color: var(--color-brown-dark) !important;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-btn-link {
+      background: none;
+      border: none;
+      font-weight: 600;
+      color: var(--color-brown-primary);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .nav-btn-link:hover, .nav-btn-link.active {
+      color: var(--color-green-primary);
+      background-color: rgba(30, 63, 32, 0.08);
+    }
+
+    .cart-badge-btn {
+      background-color: var(--color-green-primary);
+      color: #FFFFFF !important;
+      border-radius: 50px;
+      padding: 0.5rem 1.2rem;
+      font-weight: 600;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 12px rgba(30, 63, 32, 0.25);
+      cursor: pointer;
+    }
+
+    .hero-haven {
+      background: linear-gradient(135deg, #1E3F20 0%, #2D522F 60%, #3B2E24 100%);
+      color: #FFFFFF;
+      padding: 4rem 0 3.5rem 0;
+      border-bottom: 3px solid var(--color-amber-gold);
+    }
+
+    .hero-haven h1 {
+      color: #FFFFFF;
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    .book-card {
+      background: #FFFFFF;
+      border: 1px solid var(--color-cream-border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: all 0.25s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .book-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 32px rgba(30, 63, 32, 0.12);
+      border-color: var(--color-green-primary);
+    }
+
+    .book-cover {
+      height: 240px;
+      width: 100%;
+      object-fit: cover;
+      background-color: #F7F3EB;
+    }
+
+    .category-pill {
+      border: 1px solid var(--color-cream-border);
+      background: #FFFFFF;
+      color: var(--color-brown-primary);
+      border-radius: 50px;
+      padding: 0.45rem 1.1rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .category-pill.active {
+      background: var(--color-green-primary);
+      color: #FFFFFF;
+      border-color: var(--color-green-primary);
+    }
+
+    .btn-haven {
+      background: var(--color-green-primary);
+      color: #FFFFFF;
+      border: none;
+      font-weight: 600;
+      padding: 0.55rem 1.25rem;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-haven:hover {
+      background: var(--color-green-accent);
+      color: #FFFFFF;
+    }
+
+    .stat-card {
+      background: #FFFFFF;
+      border: 1px solid var(--color-cream-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .haven-footer {
+      background: var(--color-brown-dark);
+      color: #D8CFBE;
+      padding: 2.5rem 0 1.5rem 0;
+      margin-top: auto;
+      border-top: 4px solid var(--color-green-primary);
+    }
+  </style>
+
+  <!-- React 18 & Babel via CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+
+  <div id="root"></div>
+
+  <!-- React Application Script -->
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // Initial 12 Books Data
+    const INITIAL_BOOKS = [
+      {
+        id: 1,
+        title: "The Great Gatsby",
+        author: "F. Scott Fitzgerald",
+        category_id: 2,
+        category_name: "Classic Literature",
+        price: 14.99,
+        stock: 18,
+        description: "A portrait of the Jazz Age, exploring themes of decadence, idealism, and social upheaval through the mysterious Jay Gatsby.",
+        cover_image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80",
+        isbn: "978-0743273565",
+        rating: 4.8,
+        publisher: "Scribner",
+        published_year: 1925
+      },
+      {
+        id: 2,
+        title: "To Kill a Mockingbird",
+        author: "Harper Lee",
+        category_id: 2,
+        category_name: "Classic Literature",
+        price: 16.50,
+        stock: 12,
+        description: "The unforgettable novel of childhood in a sleepy Southern town and the crisis of conscience that rocked it, centered on justice.",
+        cover_image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80",
+        isbn: "978-0061120084",
+        rating: 4.9,
+        publisher: "J.B. Lippincott & Co.",
+        published_year: 1960
+      },
+      {
+        id: 3,
+        title: "Clean Code: A Handbook of Agile Software Craftsmanship",
+        author: "Robert C. Martin",
+        category_id: 3,
+        category_name: "Science & Technology",
+        price: 38.00,
+        stock: 15,
+        description: "Even bad code can function. But if code is not clean, it can bring a development organization to its knees. A definitive guide.",
+        cover_image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80",
+        isbn: "978-0132350884",
+        rating: 4.7,
+        publisher: "Prentice Hall",
+        published_year: 2008
+      },
+      {
+        id: 4,
+        title: "Designing Data-Intensive Applications",
+        author: "Martin Kleppmann",
+        category_id: 3,
+        category_name: "Science & Technology",
+        price: 44.95,
+        stock: 9,
+        description: "The big ideas behind reliable, scalable, and maintainable systems. Key architectural principles for distributed software engineers.",
+        cover_image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=600&q=80",
+        isbn: "978-1449373320",
+        rating: 5.0,
+        publisher: "O'Reilly Media",
+        published_year: 2017
+      },
+      {
+        id: 5,
+        title: "Atomic Habits",
+        author: "James Clear",
+        category_id: 5,
+        category_name: "Self-Help & Productivity",
+        price: 21.00,
+        stock: 25,
+        description: "An easy and proven way to build good habits and break bad ones. Practical strategies for microscopic changes with massive results.",
+        cover_image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=600&q=80",
+        isbn: "978-0735211292",
+        rating: 4.9,
+        publisher: "Avery",
+        published_year: 2018
+      },
+      {
+        id: 6,
+        title: "Meditations",
+        author: "Marcus Aurelius",
+        category_id: 4,
+        category_name: "Philosophy & Wisdom",
+        price: 12.50,
+        stock: 14,
+        description: "A series of personal writings by the Roman Emperor Marcus Aurelius, recording his private notes to himself on Stoic philosophy.",
+        cover_image: "https://images.unsplash.com/photo-1463320726281-696a485928c7?auto=format&fit=crop&w=600&q=80",
+        isbn: "978-0140449334",
+        rating: 4.8,
+        publisher: "Penguin Classics",
+        published_year: 2006
+      },
+      {
+        id: 7,
+        title: "1984",
+        author: "George Orwell",
+        category_id: 2,
+        category_name: "Classic Literature",
+        price: 13.99,
+        stock: 20,
+        description: "A startling vision of the world, so powerfully realized that its symbols and words like Big Brother remain current.",
+        cover_image: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=600&q=80",
+        isbn: "978-0451524935",
+        rating: 4.7,
+        publisher: "Secker & Warburg",
+        published_year: 1949
+      },
+      {
+        id: 8,
+        title: "The Alchemist",
+        author: "Paulo Coelho",
+        category_id: 1,
+        category_name: "Fiction & Literature",
+        price: 15.25,
+        stock: 30,
+        description: "A magical story of Santiago, an Andalusian shepherd boy who yearns to travel in search of worldly treasure.",
+        cover_image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=600&q=80",
+        isbn: "978-0062315007",
+        rating: 4.6,
+        publisher: "HarperOne",
+        published_year: 1988
+      },
+      {
+        id: 9,
+        title: "Deep Work",
+        author: "Cal Newport",
+        category_id: 5,
+        category_name: "Self-Help & Productivity",
+        price: 19.99,
+        stock: 8,
+        description: "Deep work is the ability to focus without distraction on cognitively demanding tasks.",
+        cover_image: "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=600&q=80",
+        isbn: "978-1455586691",
+        rating: 4.7,
+        publisher: "Grand Central Publishing",
+        published_year: 2016
+      },
+      {
+        id: 10,
+        title: "The Hound of the Baskervilles",
+        author: "Arthur Conan Doyle",
+        category_id: 6,
+        category_name: "Mystery & Thriller",
+        price: 11.50,
+        stock: 10,
+        description: "Sherlock Holmes and Dr. Watson investigate the legend of a terrifying hound that haunts Dartmoor.",
+        cover_image: "https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=600&q=80",
+        isbn: "978-0141036885",
+        rating: 4.6,
+        publisher: "George Newnes",
+        published_year: 1902
+      },
+      {
+        id: 11,
+        title: "The Pragmatic Programmer",
+        author: "David Thomas & Andrew Hunt",
+        category_id: 3,
+        category_name: "Science & Technology",
+        price: 42.00,
+        stock: 11,
+        description: "Practical advice on career development, software design, refactoring, and code craftsmanship.",
+        cover_image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80",
+        isbn: "978-0135957059",
+        rating: 4.8,
+        publisher: "Addison-Wesley",
+        published_year: 2019
+      },
+      {
+        id: 12,
+        title: "Crime and Punishment",
+        author: "Fyodor Dostoevsky",
+        category_id: 2,
+        category_name: "Classic Literature",
+        price: 17.00,
+        stock: 5,
+        description: "A destitute former student in Saint Petersburg formulates a scheme to murder an unscrupulous pawnbroker.",
+        cover_image: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=600&q=80",
+        isbn: "978-0143058144",
+        rating: 4.7,
+        publisher: "The Russian Messenger",
+        published_year: 1866
+      }
+    ];
+
+    const CATEGORIES = [
+      { id: 1, name: "Fiction & Literature" },
+      { id: 2, name: "Classic Literature" },
+      { id: 3, name: "Science & Technology" },
+      { id: 4, name: "Philosophy & Wisdom" },
+      { id: 5, name: "Self-Help & Productivity" },
+      { id: 6, name: "Mystery & Thriller" }
+    ];
+
+    function App() {
+      // Active View: 'catalogue' | 'admin' | 'cart' | 'receipt'
+      const [currentView, setCurrentView] = useState('catalogue');
+      const [books, setBooks] = useState(INITIAL_BOOKS);
+      const [cart, setCart] = useState([]);
+      const [selectedCategory, setSelectedCategory] = useState(0);
+      const [searchTerm, setSearchTerm] = useState('');
+      const [selectedBook, setSelectedBook] = useState(null);
+      const [toastMsg, setToastMsg] = useState(null);
+      const [completedOrder, setCompletedOrder] = useState(null);
+
+      // Admin Form Modals
+      const [showAddModal, setShowAddModal] = useState(false);
+      const [showEditModal, setShowEditModal] = useState(false);
+      const [showDeleteModal, setShowDeleteModal] = useState(false);
+      const [currentAdminBook, setCurrentAdminBook] = useState(null);
+      const [formData, setFormData] = useState({ title: '', author: '', category_id: 1, price: '', stock: '' });
+      const [formErrors, setFormErrors] = useState({});
+
+      // Checkout State
+      const [showCheckoutModal, setShowCheckoutModal] = useState(false);
+      const [checkoutForm, setCheckoutForm] = useState({ name: '', email: '', phone: '', address: '', city: '' });
+      const [checkoutErrors, setCheckoutErrors] = useState({});
+
+      const showToast = (msg) => {
+        setToastMsg(msg);
+        setTimeout(() => setToastMsg(null), 3500);
+      };
+
+      // Cart Actions
+      const addToCart = (book) => {
+        if (book.stock <= 0) {
+          showToast(`"${book.title}" is out of stock!`);
+          return;
+        }
+        setCart(prev => {
+          const exists = prev.find(i => i.id === book.id);
+          if (exists) {
+            if (exists.qty >= book.stock) {
+              showToast(`Cannot add more than ${book.stock} available copies!`);
+              return prev;
+            }
+            return prev.map(i => i.id === book.id ? { ...i, qty: i.qty + 1 } : i);
+          }
+          return [...prev, { ...book, qty: 1 }];
+        });
+        showToast(`Added "${book.title}" to Cart!`);
+      };
+
+      const updateCartQty = (id, newQty) => {
+        if (newQty <= 0) {
+          setCart(prev => prev.filter(i => i.id !== id));
+        } else {
+          setCart(prev => prev.map(i => i.id === id ? { ...i, qty: newQty } : i));
+        }
+      };
+
+      const cartSubtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+      const cartCount = cart.reduce((acc, i) => acc + i.qty, 0);
+
+      // Filtering Books (Module 1)
+      const filteredBooks = books.filter(b => {
+        const matchesCategory = selectedCategory === 0 || b.category_id === selectedCategory;
+        const matchesSearch = b.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                              b.author.toLowerCase().includes(searchTerm.toLowerCase());
+        return matchesCategory && matchesSearch;
+      });
+
+      // Quick Stock Update (Module 2)
+      const handleQuickStock = (book, delta) => {
+        const newStock = Math.max(0, book.stock + delta);
+        setBooks(prev => prev.map(b => b.id === book.id ? { ...b, stock: newStock } : b));
+        showToast(`Updated "${book.title}" stock to ${newStock}`);
+      };
+
+      // Add Book Submit (Module 2)
+      const handleAddSubmit = (e) => {
+        e.preventDefault();
+        const errors = {};
+        if (!formData.title) errors.title = "Title is required";
+        if (!formData.author) errors.author = "Author is required";
+        if (!formData.price || formData.price <= 0) errors.price = "Price must be > 0";
+        if (formData.stock === '' || formData.stock < 0) errors.stock = "Stock must be >= 0";
+
+        if (Object.keys(errors).length > 0) {
+          setFormErrors(errors);
+          return;
+        }
+
+        const catObj = CATEGORIES.find(c => c.id === Number(formData.category_id));
+        const newBook = {
+          id: Date.now(),
+          title: formData.title,
+          author: formData.author,
+          category_id: Number(formData.category_id),
+          category_name: catObj ? catObj.name : "Literature",
+          price: parseFloat(formData.price),
+          stock: parseInt(formData.stock),
+          cover_image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80",
+          rating: 4.8,
+          published_year: 2024
+        };
+
+        setBooks([newBook, ...books]);
+        setShowAddModal(false);
+        setFormData({ title: '', author: '', category_id: 1, price: '', stock: '' });
+        showToast(`Book "${newBook.title}" added to inventory!`);
+      };
+
+      // Delete Book (Module 2)
+      const handleDeleteConfirm = () => {
+        if (!currentAdminBook) return;
+        setBooks(prev => prev.filter(b => b.id !== currentAdminBook.id));
+        setShowDeleteModal(false);
+        showToast(`Book deleted from inventory!`);
+      };
+
+      // Place Order Checkout (Module 3)
+      const handleCheckoutSubmit = (e) => {
+        e.preventDefault();
+        const errs = {};
+        if (!checkoutForm.name) errs.name = "Name is required";
+        if (!checkoutForm.email) errs.email = "Email is required";
+        if (!checkoutForm.address) errs.address = "Address is required";
+
+        if (Object.keys(errs).length > 0) {
+          setCheckoutErrors(errs);
+          return;
+        }
+
+        // Deduct stock
+        setBooks(prev => prev.map(b => {
+          const inCart = cart.find(c => c.id === b.id);
+          return inCart ? { ...b, stock: Math.max(0, b.stock - inCart.qty) } : b;
+        }));
+
+        const orderReceipt = {
+          id: Math.floor(1000 + Math.random() * 9000),
+          customer: checkoutForm,
+          items: [...cart],
+          total: cartSubtotal,
+          date: new Date().toLocaleDateString()
+        };
+
+        setCompletedOrder(orderReceipt);
+        setCart([]);
+        setShowCheckoutModal(false);
+        setCurrentView('receipt');
+        showToast("Order placed successfully!");
+      };
+
+      return (
+        <div>
+          {/* Toast Notification */}
+          {toastMsg && (
+            <div className="position-fixed bottom-0 end-0 p-3" style={{ zIndex: 9999 }}>
+              <div className="toast show bg-success text-white p-3 rounded-3 shadow-lg d-flex align-items-center gap-2">
+                <i className="bi bi-check-circle-fill fs-5"></i>
+                <span>{toastMsg}</span>
+              </div>
+            </div>
+          )}
+
+          {/* Top Navbar */}
+          <nav className="navbar navbar-expand-lg haven-navbar">
+            <div className="container">
+              <a className="haven-brand" href="#" onClick={() => setCurrentView('catalogue')}>
+                <i className="bi bi-book-half text-success"></i>
+                <span>Book Haven</span>
+              </a>
+
+              <div className="d-flex align-items-center gap-2">
+                <button 
+                  className={`nav-btn-link ${currentView === 'catalogue' ? 'active' : ''}`}
+                  onClick={() => setCurrentView('catalogue')}
+                >
+                  <i className="bi bi-grid me-1"></i> Catalogue
+                </button>
+
+                <button 
+                  className={`nav-btn-link ${currentView === 'admin' ? 'active' : ''}`}
+                  onClick={() => setCurrentView('admin')}
+                >
+                  <i className="bi bi-sliders me-1"></i> Admin Dashboard
+                </button>
+
+                <button 
+                  className="cart-badge-btn ms-2"
+                  onClick={() => setCurrentView('cart')}
+                >
+                  <i className="bi bi-bag-heart-fill"></i>
+                  <span>Cart ({cartCount})</span>
+                </button>
+              </div>
+            </div>
+          </nav>
+
+          {/* MAIN VIEW SWITCHER */}
+          {currentView === 'catalogue' && (
+            <div>
+              {/* Hero Banner */}
+              <section className="hero-haven">
+                <div className="container">
+                  <div className="row align-items-center">
+                    <div className="col-lg-8">
+                      <span className="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-3">
+                        Curated Literary Collection
+                      </span>
+                      <h1 className="mb-3">Discover Your Next Great Read</h1>
+                      <p className="lead text-light mb-4" style={{ maxWidth: '600px' }}>
+                        Explore masterpieces of world literature, computer science classics, and philosophy with Book Haven.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Module 1: Catalogue & Search */}
+              <div className="container py-5">
+                <div className="row g-3 align-items-center mb-4">
+                  <div className="col-md-6">
+                    <h2 className="fw-bold mb-1">Book Catalogue</h2>
+                    <p className="text-muted small mb-0">Showing available titles and live inventory</p>
+                  </div>
+
+                  <div className="col-md-6">
+                    <div className="input-group shadow-sm">
+                      <span className="input-group-text bg-white border-end-0"><i className="bi bi-search"></i></span>
+                      <input 
+                        type="text" 
+                        className="form-control border-start-0" 
+                        placeholder="Search by title or author (e.g. Clean, Gatsby)..." 
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                      />
+                      {searchTerm && (
+                        <button className="btn btn-outline-secondary" onClick={() => setSearchTerm('')}>Clear</button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Category Pills */}
+                <div className="d-flex flex-wrap gap-2 mb-4">
+                  <button 
+                    className={`category-pill ${selectedCategory === 0 ? 'active' : ''}`}
+                    onClick={() => setSelectedCategory(0)}
+                  >
+                    All Categories ({books.length})
+                  </button>
+                  {CATEGORIES.map(c => (
+                    <button 
+                      key={c.id} 
+                      className={`category-pill ${selectedCategory === c.id ? 'active' : ''}`}
+                      onClick={() => setSelectedCategory(c.id)}
+                    >
+                      {c.name}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Books Grid */}
+                {filteredBooks.length === 0 ? (
+                  <div className="text-center py-5 bg-white rounded-4 border p-5 my-4">
+                    <i className="bi bi-search fs-1 text-warning d-block mb-3"></i>
+                    <h4>No Matching Books Found</h4>
+                    <p className="text-muted">No books matched "{searchTerm}". Try a different search keyword.</p>
+                    <button className="btn btn-haven rounded-pill px-4" onClick={() => { setSearchTerm(''); setSelectedCategory(0); }}>
+                      Reset Search & Filters
+                    </button>
+                  </div>
+                ) : (
+                  <div className="row g-4">
+                    {filteredBooks.map(b => (
+                      <div key={b.id} className="col-lg-3 col-md-6">
+                        <div className="book-card">
+                          <img 
+                            src={b.cover_image} 
+                            alt={b.title} 
+                            className="book-cover"
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80";
+                            }}
+                          />
+                          <div className="p-3 d-flex flex-column flex-grow-1">
+                            <span className="badge bg-light text-dark border align-self-start mb-2" style={{ fontSize: '0.75rem' }}>
+                              {b.category_name}
+                            </span>
+                            <h5 className="fw-bold mb-1" style={{ fontSize: '1.05rem', minHeight: '2.5rem' }}>{b.title}</h5>
+                            <p className="text-muted small mb-2">by {b.author}</p>
+                            
+                            <div className="d-flex justify-content-between align-items-center mt-auto pt-2 border-top">
+                              <span className="fs-5 fw-bold text-success">${b.price.toFixed(2)}</span>
+                              <span className={`badge ${b.stock > 0 ? 'bg-success' : 'bg-danger'} rounded-pill`}>
+                                {b.stock > 0 ? `Stock: ${b.stock}` : 'Sold Out'}
+                              </span>
+                            </div>
+
+                            <div className="d-flex gap-2 mt-3">
+                              <button 
+                                className="btn btn-sm btn-outline-secondary flex-grow-1"
+                                onClick={() => setSelectedBook(b)}
+                              >
+                                Details
+                              </button>
+                              <button 
+                                className="btn btn-sm btn-haven flex-grow-1"
+                                disabled={b.stock <= 0}
+                                onClick={() => addToCart(b)}
+                              >
+                                Add to Cart
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Module 2: Admin Dashboard */}
+          {currentView === 'admin' && (
+            <div className="container py-5">
+              <div className="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                  <h2 className="fw-bold mb-1">Inventory Management Dashboard</h2>
+                  <p className="text-muted small mb-0">Manage books, adjust stock levels, and inspect inventory value</p>
+                </div>
+                <button className="btn btn-haven rounded-pill" onClick={() => setShowAddModal(true)}>
+                  <i className="bi bi-plus-circle me-1"></i> Add New Book
+                </button>
+              </div>
+
+              {/* Stats Cards */}
+              <div className="row g-3 mb-4">
+                <div className="col-md-3">
+                  <div className="stat-card">
+                    <i className="bi bi-journal-bookmark-fill fs-2 text-success"></i>
+                    <div>
+                      <div className="fs-4 fw-bold">{books.length}</div>
+                      <div className="small text-muted text-uppercase">Total Titles</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="stat-card">
+                    <i className="bi bi-boxes fs-2 text-primary"></i>
+                    <div>
+                      <div className="fs-4 fw-bold">{books.reduce((a, b) => a + b.stock, 0)}</div>
+                      <div className="small text-muted text-uppercase">Total Units</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="stat-card">
+                    <i className="bi bi-cash-stack fs-2 text-warning"></i>
+                    <div>
+                      <div className="fs-4 fw-bold">${books.reduce((a, b) => a + (b.price * b.stock), 0).toFixed(2)}</div>
+                      <div className="small text-muted text-uppercase">Inventory Value</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="stat-card">
+                    <i className="bi bi-exclamation-triangle fs-2 text-danger"></i>
+                    <div>
+                      <div className="fs-4 fw-bold text-danger">{books.filter(b => b.stock < 5).length}</div>
+                      <div className="small text-muted text-uppercase">Low Stock Alerts</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Inventory Table */}
+              <div className="bg-white rounded-3 border shadow-sm overflow-hidden">
+                <table className="table align-middle mb-0">
+                  <thead className="table-light">
+                    <tr>
+                      <th>Cover</th>
+                      <th>Title & Author</th>
+                      <th>Category</th>
+                      <th>Price</th>
+                      <th>Available Stock</th>
+                      <th className="text-end">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {books.map(b => (
+                      <tr key={b.id}>
+                        <td>
+                          <img 
+                            src={b.cover_image} 
+                            style={{ width: '40px', height: '52px', objectFit: 'cover' }} 
+                            className="rounded" 
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80";
+                            }}
+                          />
+                        </td>
+                        <td>
+                          <div className="fw-bold">{b.title}</div>
+                          <div className="small text-muted">by {b.author}</div>
+                        </td>
+                        <td><span className="badge bg-light text-dark border">{b.category_name}</span></td>
+                        <td className="fw-bold text-success">${b.price.toFixed(2)}</td>
+                        <td>
+                          <div className="d-flex align-items-center gap-2">
+                            <button className="btn btn-sm btn-outline-secondary py-0 px-2" onClick={() => handleQuickStock(b, -1)}>-</button>
+                            <span className={`badge ${b.stock === 0 ? 'bg-danger' : b.stock < 5 ? 'bg-warning text-dark' : 'bg-success'}`}>
+                              {b.stock}
+                            </span>
+                            <button className="btn btn-sm btn-outline-secondary py-0 px-2" onClick={() => handleQuickStock(b, 1)}>+</button>
+                          </div>
+                        </td>
+                        <td className="text-end">
+                          <button 
+                            className="btn btn-sm btn-outline-danger"
+                            onClick={() => { setCurrentAdminBook(b); setShowDeleteModal(true); }}
+                          >
+                            <i className="bi bi-trash"></i> Delete
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {/* Module 3: Cart View */}
+          {currentView === 'cart' && (
+            <div className="container py-5">
+              <h2 className="fw-bold mb-4">Your Shopping Cart</h2>
+              {cart.length === 0 ? (
+                <div className="text-center py-5 bg-white rounded-4 border p-5">
+                  <i className="bi bi-bag-x fs-1 text-warning d-block mb-3"></i>
+                  <h4>Your Cart is Empty</h4>
+                  <p className="text-muted">You haven't added any books yet.</p>
+                  <button className="btn btn-haven rounded-pill px-4" onClick={() => setCurrentView('catalogue')}>
+                    Browse Catalogue
+                  </button>
+                </div>
+              ) : (
+                <div className="row g-4">
+                  <div className="col-lg-8">
+                    <div className="bg-white rounded-4 border p-3">
+                      <table className="table align-middle">
+                        <thead>
+                          <tr>
+                            <th>Book</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {cart.map(i => (
+                            <tr key={i.id}>
+                              <td>
+                                <div className="fw-bold">{i.title}</div>
+                                <div className="small text-muted">{i.author}</div>
+                              </td>
+                              <td>${i.price.toFixed(2)}</td>
+                              <td>
+                                <div className="d-flex align-items-center gap-2">
+                                  <button className="btn btn-sm btn-outline-secondary py-0 px-2" onClick={() => updateCartQty(i.id, i.qty - 1)}>-</button>
+                                  <span>{i.qty}</span>
+                                  <button className="btn btn-sm btn-outline-secondary py-0 px-2" onClick={() => updateCartQty(i.id, i.qty + 1)}>+</button>
+                                </div>
+                              </td>
+                              <td className="fw-bold text-success">${(i.price * i.qty).toFixed(2)}</td>
+                              <td>
+                                <button className="btn btn-sm text-danger border-0" onClick={() => updateCartQty(i.id, 0)}>
+                                  <i className="bi bi-trash"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-4">
+                    <div className="bg-white rounded-4 border p-4 shadow-sm">
+                      <h5 className="fw-bold mb-3">Summary</h5>
+                      <div className="d-flex justify-content-between mb-2">
+                        <span>Subtotal</span>
+                        <span>${cartSubtotal.toFixed(2)}</span>
+                      </div>
+                      <div className="d-flex justify-content-between mb-2">
+                        <span>Shipping</span>
+                        <span className="text-success fw-bold">FREE</span>
+                      </div>
+                      <div className="d-flex justify-content-between border-top pt-3 mb-4">
+                        <span className="fs-5 fw-bold">Total</span>
+                        <span className="fs-4 fw-bold text-success">${cartSubtotal.toFixed(2)}</span>
+                      </div>
+                      <button className="btn btn-haven w-100 py-3 rounded-pill fw-bold" onClick={() => setShowCheckoutModal(true)}>
+                        Proceed to Checkout
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Module 3: Order Receipt View */}
+          {currentView === 'receipt' && completedOrder && (
+            <div className="container py-5">
+              <div className="card max-w-lg mx-auto border-0 shadow-lg rounded-4 p-4 text-center" style={{ maxWidth: '600px' }}>
+                <i className="bi bi-check-circle-fill fs-1 text-success mb-2"></i>
+                <h3 className="fw-bold mb-1">Order Confirmed!</h3>
+                <p className="text-muted small">Order ID: #{completedOrder.id} | Date: {completedOrder.date}</p>
+                <hr />
+                <div className="text-start mb-4">
+                  <h6><strong>Customer Details:</strong></h6>
+                  <p className="mb-0 text-muted">{completedOrder.customer.name}</p>
+                  <p className="mb-0 text-muted">{completedOrder.customer.email}</p>
+                  <p className="mb-0 text-muted">{completedOrder.customer.address}</p>
+                </div>
+                <div className="text-start mb-4">
+                  <h6><strong>Ordered Books:</strong></h6>
+                  {completedOrder.items.map(it => (
+                    <div key={it.id} className="d-flex justify-content-between small text-muted mb-1">
+                      <span>{it.title} x {it.qty}</span>
+                      <span>${(it.price * it.qty).toFixed(2)}</span>
+                    </div>
+                  ))}
+                  <div className="d-flex justify-content-between fw-bold pt-2 border-top mt-2">
+                    <span>Total Paid:</span>
+                    <span className="text-success">${completedOrder.total.toFixed(2)}</span>
+                  </div>
+                </div>
+                <button className="btn btn-haven rounded-pill" onClick={() => setCurrentView('catalogue')}>
+                  Back to Bookstore
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Book Details Modal */}
+          {selectedBook && (
+            <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}>
+              <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content rounded-4 p-4">
+                  <div className="modal-header border-0 pb-0">
+                    <h5 className="modal-title fw-bold">{selectedBook.title}</h5>
+                    <button className="btn-close" onClick={() => setSelectedBook(null)}></button>
+                  </div>
+                  <div className="modal-body">
+                    <p className="text-muted small">by <strong>{selectedBook.author}</strong></p>
+                    <p>{selectedBook.description}</p>
+                    <div className="d-flex justify-content-between align-items-center mb-3">
+                      <span className="fs-4 fw-bold text-success">${selectedBook.price.toFixed(2)}</span>
+                      <span className="badge bg-success">{selectedBook.stock} in stock</span>
+                    </div>
+                    <button 
+                      className="btn btn-haven w-100 rounded-pill"
+                      disabled={selectedBook.stock <= 0}
+                      onClick={() => { addToCart(selectedBook); setSelectedBook(null); }}
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Add Book Modal */}
+          {showAddModal && (
+            <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}>
+              <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content rounded-4 p-4">
+                  <div className="modal-header border-0 pb-0">
+                    <h5 className="modal-title fw-bold">Add New Book</h5>
+                    <button className="btn-close" onClick={() => setShowAddModal(false)}></button>
+                  </div>
+                  <form onSubmit={handleAddSubmit}>
+                    <div className="modal-body">
+                      <div className="mb-2">
+                        <label className="form-label small">Title *</label>
+                        <input className="form-control" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} />
+                        {formErrors.title && <div className="text-danger small">{formErrors.title}</div>}
+                      </div>
+                      <div className="mb-2">
+                        <label className="form-label small">Author *</label>
+                        <input className="form-control" value={formData.author} onChange={e => setFormData({...formData, author: e.target.value})} />
+                        {formErrors.author && <div className="text-danger small">{formErrors.author}</div>}
+                      </div>
+                      <div className="mb-2">
+                        <label className="form-label small">Category</label>
+                        <select className="form-select" value={formData.category_id} onChange={e => setFormData({...formData, category_id: e.target.value})}>
+                          {CATEGORIES.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+                        </select>
+                      </div>
+                      <div className="row g-2 mb-2">
+                        <div className="col-6">
+                          <label className="form-label small">Price ($) *</label>
+                          <input type="number" step="0.01" className="form-control" value={formData.price} onChange={e => setFormData({...formData, price: e.target.value})} />
+                          {formErrors.price && <div className="text-danger small">{formErrors.price}</div>}
+                        </div>
+                        <div className="col-6">
+                          <label className="form-label small">Stock *</label>
+                          <input type="number" className="form-control" value={formData.stock} onChange={e => setFormData({...formData, stock: e.target.value})} />
+                          {formErrors.stock && <div className="text-danger small">{formErrors.stock}</div>}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="modal-footer border-0">
+                      <button type="button" className="btn btn-outline-secondary" onClick={() => setShowAddModal(false)}>Cancel</button>
+                      <button type="submit" className="btn btn-haven">Save Book</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Delete Confirmation Modal */}
+          {showDeleteModal && currentAdminBook && (
+            <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}>
+              <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content rounded-4 p-4 text-center">
+                  <i className="bi bi-exclamation-triangle fs-1 text-danger mb-2"></i>
+                  <h5>Delete Book?</h5>
+                  <p className="text-muted">Are you sure you want to remove <strong>"{currentAdminBook.title}"</strong>?</p>
+                  <div className="d-flex justify-content-center gap-2">
+                    <button className="btn btn-outline-secondary" onClick={() => setShowDeleteModal(false)}>Cancel</button>
+                    <button className="btn btn-danger" onClick={handleDeleteConfirm}>Yes, Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Checkout Modal */}
+          {showCheckoutModal && (
+            <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}>
+              <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content rounded-4 p-4">
+                  <div className="modal-header border-0 pb-0">
+                    <h5 className="modal-title fw-bold">Customer Checkout</h5>
+                    <button className="btn-close" onClick={() => setShowCheckoutModal(false)}></button>
+                  </div>
+                  <form onSubmit={handleCheckoutSubmit}>
+                    <div className="modal-body">
+                      <div className="mb-2">
+                        <label className="form-label small">Full Name *</label>
+                        <input className="form-control" value={checkoutForm.name} onChange={e => setCheckoutForm({...checkoutForm, name: e.target.value})} />
+                        {checkoutErrors.name && <div className="text-danger small">{checkoutErrors.name}</div>}
+                      </div>
+                      <div className="mb-2">
+                        <label className="form-label small">Email Address *</label>
+                        <input type="email" className="form-control" value={checkoutForm.email} onChange={e => setCheckoutForm({...checkoutForm, email: e.target.value})} />
+                        {checkoutErrors.email && <div className="text-danger small">{checkoutErrors.email}</div>}
+                      </div>
+                      <div className="mb-2">
+                        <label className="form-label small">Shipping Address *</label>
+                        <textarea className="form-control" rows="2" value={checkoutForm.address} onChange={e => setCheckoutForm({...checkoutForm, address: e.target.value})}></textarea>
+                        {checkoutErrors.address && <div className="text-danger small">{checkoutErrors.address}</div>}
+                      </div>
+                    </div>
+                    <div className="modal-footer border-0">
+                      <button type="button" className="btn btn-outline-secondary" onClick={() => setShowCheckoutModal(false)}>Cancel</button>
+                      <button type="submit" className="btn btn-haven">Confirm & Pay (${cartSubtotal.toFixed(2)})</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Footer */}
+          <footer className="haven-footer">
+            <div className="container text-center">
+              <h5 className="text-white mb-2">Book Haven – Online Bookstore and Inventory System</h5>
+              <p className="text-white-50 small mb-0">Crafted with ReactJS, Bootstrap 5.3, and PHP MySQL Architecture</p>
+            </div>
+          </footer>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
